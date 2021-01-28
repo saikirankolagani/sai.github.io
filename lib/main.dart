@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:iflexweb_app/Forgot_password.dart';
-import 'package:iflexweb_app/Home.dart';
-import 'package:iflexweb_app/Register.dart';
+import 'package:iflexweb_app/forgot_password.dart';
+import 'package:iflexweb_app/home.dart';
+import 'package:iflexweb_app/register.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 
 void main() {

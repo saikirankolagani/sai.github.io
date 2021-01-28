@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iflexweb_app/categories_page.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
-import '../Home.dart';
+import '../home.dart';
 class SideNavigationMenu extends StatefulWidget {
   @override
   _SideNavigationMenuState createState() => _SideNavigationMenuState();
