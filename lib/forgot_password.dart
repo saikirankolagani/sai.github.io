@@ -1,14 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iflexweb_app/models/check_otp.dart';
+import 'package:iflexweb_app/models/forget_password_model.dart';
+import 'package:iflexweb_app/repo/auth_repo.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+
+import 'home.dart';
 class forgotpassword extends StatefulWidget {
+
   @override
   _forgotpasswordState createState() => _forgotpasswordState();
 }
 
 class _forgotpasswordState extends State<forgotpassword> {
+  TextEditingController emailidController=TextEditingController();
+  //TextEditingController otpController=TextEditingController();
+  var emailid;
   @override
   var time =30;
   String otp;
@@ -59,6 +68,7 @@ class _forgotpasswordState extends State<forgotpassword> {
                         child: Form(
                           key: _formKey,
                           child: TextFormField(
+                            controller:emailidController,
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Please enter your vaild email id';
@@ -87,8 +97,10 @@ class _forgotpasswordState extends State<forgotpassword> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.0),
                             ),
-                            onPressed: (){
+                            onPressed: ()async{
                               if (_formKey.currentState.validate()){
+                                Repo loginRepo = Repo();
+                                ForgetPasswordModel loginmodel = await loginRepo.createforgetpassword(emailidController.text);
                                 showDialog(context:context,builder:(BuildContext context){
                                   return AlertDialog(
                                     content: Column(
@@ -100,7 +112,7 @@ class _forgotpasswordState extends State<forgotpassword> {
                                         SizedBox(height: 5,),
                                         Center(
                                           child: OTPTextField(
-                                              length: 6,
+                                              length:4,
                                               width: MediaQuery.of(context).size.width*0.25,
                                               textFieldAlignment: MainAxisAlignment.spaceBetween,
                                               fieldWidth: 40,
@@ -132,9 +144,11 @@ class _forgotpasswordState extends State<forgotpassword> {
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(5.0),
                                             ),
-                                            onPressed: (){
+                                            onPressed: ()async{
+                                              Repo loginRepo = Repo();
+                                              CheckOtp loginmodel = await loginRepo.createcheckotp(emailidController.text,otp);
                                               Navigator.push(context,MaterialPageRoute(
-                                                //builder: (context)=>newpassword(),
+                                                builder: (context)=>home(),
                                               ));
                                             },
                                           ),

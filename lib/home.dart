@@ -22,6 +22,7 @@ final List<String> imgList = [
 ];
 
 class _homeState extends State<home>with SingleTickerProviderStateMixin {
+  var emailid;
   var selectedgram;
   int counter = 0;
   int newCounter = 0;
@@ -37,10 +38,10 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
   //   createCardList();
   //   super.initState();
   // }
-  // void initState() {
-  //   createCardList();
-  //   super.initState();
-  // }
+   void initState() {
+     createCardList();
+     super.initState();
+   }
 
   List<String> images = ['images/palak.png',
     'images/mushrooms.png',
@@ -67,24 +68,11 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
     });
   }
 
-  AnimationController animationController;
-  bool _menuShown = false;
 
-  @override
-  void initState() {
-    createCardList();
 
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    Animation opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
-    if (_menuShown)
-      animationController.forward();
-    else
-      animationController.reverse();
     return Scaffold(
         body: SingleChildScrollView(
           child: Stack(

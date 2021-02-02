@@ -126,7 +126,8 @@ class _BasicProfileState extends State<BasicProfile> {
                                   padding: const EdgeInsets.all(10.0),
                                   child: CircleAvatar(
                                     radius:80,
-                                    backgroundImage:AssetImage('images/assortment.png'),
+                                    backgroundColor:Colors.white,
+                                    backgroundImage:AssetImage('images/profile.png',),
                                   ),
                                 ),
                                 Align(

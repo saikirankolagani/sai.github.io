@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iflexweb_app/refer_friend.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 
 import '../basic_profile.dart';
@@ -69,8 +70,8 @@ class _ProfileMenuState extends State<ProfileMenu> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        // builder: (context) =>
-                                        //     OrderHistory()
+                                         builder: (context) =>
+                                             OrderHistory()
                                     ));
                               },
                               title:Text('Order History',style:TextStyle(fontSize:16,fontWeight:FontWeight.w400,color:Colors.black),),
@@ -85,7 +86,7 @@ class _ProfileMenuState extends State<ProfileMenu> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        //builder: (context) => WishList()
+                                        builder: (context) => WishList()
                                     )
                                 );
                               },
@@ -98,7 +99,12 @@ class _ProfileMenuState extends State<ProfileMenu> {
                             ),
                             ListTile(
                               onTap: (){
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>ReferFriend()
+                                    )
+                                );
                               },
                               title:Text('Refer A Friend',style:TextStyle(fontSize:16,fontWeight:FontWeight.w400,color:Colors.black),),
                             ),

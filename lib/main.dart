@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:iflexweb_app/forgot_password.dart';
 import 'package:iflexweb_app/home.dart';
+import 'package:iflexweb_app/models/login_model.dart';
 import 'package:iflexweb_app/register.dart';
+import 'package:iflexweb_app/repo/auth_repo.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
+import 'dart:io';
+import 'dart:ui';
 
 void main() {
   runApp(new MaterialApp(
@@ -18,6 +22,8 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  TextEditingController emailController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
   bool _showPassword = false;
   bool _checkBoxVal = true;
   final _formKey = GlobalKey<FormState>();
@@ -106,6 +112,7 @@ class _loginState extends State<login> {
                           child: Container(
                             width: double.infinity,
                             child: TextFormField(
+                              controller:emailController,
                               validator: (value) {
                                 if (value.isEmpty) {
                                   return 'Please enter your vaild email id';
@@ -146,6 +153,7 @@ class _loginState extends State<login> {
                           child: Container(
                             width: double.infinity,
                             child: TextFormField(
+                              controller:passwordController,
                               validator: (value) {
                                 if (value.isEmpty) {
                                   return 'Please enter your password';
@@ -239,13 +247,41 @@ class _loginState extends State<login> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5.0),
                               ),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => home(),
-                                      ));
+                              onPressed: () async{
+                                try {
+                                  if (_formKey.currentState.validate()) {
+                                    Repo loginRepo = Repo();
+                                    LoginModel loginmodel = await loginRepo.login(
+                                        emailController.text,
+                                        passwordController.text);
+                                    if (loginmodel.status==200){
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => home(),
+                                          ));
+                                    }
+                                  }
+                                }
+                                catch(e){
+                                  AlertDialog alert = AlertDialog(
+                                    title: Text("Login Failed",style:TextStyle(fontSize:16,fontWeight:FontWeight.w500,color:Colors.red),),
+                                    content: Text("The Email or Password does not exits,please enter a valid email/password"+"\n"+"New to Swadesh please register with your Details",style:TextStyle(fontSize:14,fontWeight:FontWeight.w400,color:AppColors.blueColor),),
+                                    actions: [FlatButton(
+                                      onPressed:(){
+                                        Navigator.pop(context);
+                                  },
+                                      child:Text('Close'),
+                                    ),
+                                    ],
+                                  );
+                                  // show the dialog
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return alert;
+                                    },
+                                  );
                                 }
                               }
                             ),

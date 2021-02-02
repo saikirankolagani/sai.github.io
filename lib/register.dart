@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:iflexweb_app/models/register_model.dart';
+import 'package:iflexweb_app/repo/auth_repo.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
+
+import 'home.dart';
 class register extends StatefulWidget {
   @override
   _registerState createState() => _registerState();
 }
 
 class _registerState extends State<register> {
+  TextEditingController firstnameController=TextEditingController();
+  TextEditingController lastnameController= TextEditingController();
+  TextEditingController phonenumberController=TextEditingController();
+  TextEditingController emailidController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
   @override
   bool _showPassword = false;
   bool _checkBoxVal = true;
@@ -35,6 +44,7 @@ class _registerState extends State<register> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(50,10,50,10),
                       child: TextFormField(
+                        controller: firstnameController,
                         decoration: InputDecoration(
                             border:OutlineInputBorder(),
                             hintText: 'Stefani',
@@ -45,6 +55,7 @@ class _registerState extends State<register> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(50,10,50,10),
                       child: TextFormField(
+                        controller: lastnameController,
                         decoration: InputDecoration(
                             border:OutlineInputBorder(),
                             hintText: 'Williams',
@@ -55,6 +66,7 @@ class _registerState extends State<register> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(50,10,50,10),
                       child: TextFormField(
+                        controller:phonenumberController,
                         decoration: InputDecoration(
                             border:OutlineInputBorder(),
                             hintText: '+41 68547890',
@@ -65,6 +77,7 @@ class _registerState extends State<register> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(50,10,50,10),
                       child: TextFormField(
+                        controller: emailidController,
                         decoration: InputDecoration(
                             border:OutlineInputBorder(),
                             hintText: 'stefani.williams@yahoo.com',
@@ -77,6 +90,7 @@ class _registerState extends State<register> {
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
+                          controller:passwordController,
                           obscureText: !_showPassword,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -181,7 +195,9 @@ class _registerState extends State<register> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          onPressed: () {
+                          onPressed: () async{
+                            Repo loginRepo = Repo();
+                            RegisterModel loginmodel = await loginRepo.createRegistration(firstnameController.text,lastnameController.text,phonenumberController.text,emailidController.text,passwordController.text);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -213,7 +229,7 @@ class _registerState extends State<register> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          //builder: (context)=>register()
+                                          builder: (context)=>home()
                                       ));
                                 },
                                 child: Text(

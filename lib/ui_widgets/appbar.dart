@@ -4,6 +4,7 @@ import 'package:iflexweb_app/utils/app_colors.dart';
 import '../forgot_password.dart';
 import '../home.dart';
 import '../order_history.dart';
+import '../refer_friend.dart';
 import '../wish_list.dart';
 
 class TopBar extends StatefulWidget {
@@ -93,8 +94,8 @@ var username='Stefani Williams';
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        // builder: (context) =>
-                                        //     WishList()
+                                         builder: (context) =>
+                                             WishList()
                                     ));
                                 //print('print b');
                                 break;
@@ -102,8 +103,8 @@ var username='Stefani Williams';
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        // builder: (context) =>
-                                        //     OrderHistory()
+                                         builder: (context) =>
+                                             OrderHistory()
                                     ));
                                 //print('print b');
                                 break;
@@ -112,7 +113,7 @@ var username='Stefani Williams';
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            forgotpassword()));
+                                            ReferFriend()));
                                 //print('print b');
                                 break;
                               case "Address":
