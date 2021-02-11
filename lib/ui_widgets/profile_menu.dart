@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iflexweb_app/address.dart';
 import 'package:iflexweb_app/refer_friend.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 
 import '../basic_profile.dart';
+import '../change_password.dart';
+import '../faq.dart';
 import '../order_history.dart';
 import '../wish_list.dart';
 class ProfileMenu extends StatefulWidget {
@@ -115,9 +118,29 @@ class _ProfileMenuState extends State<ProfileMenu> {
                             ),
                             ListTile(
                               onTap: (){
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>address()
+                                    )
+                                );
                               },
                               title:Text('Address',style:TextStyle(fontSize:16,fontWeight:FontWeight.w400,color:Colors.black),),
+                            ),
+                            Divider(
+                              height:1,
+                              indent:10,
+                              endIndent:10,
+                            ),ListTile(
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>changepassword()
+                                    )
+                                );
+                              },
+                              title:Text('Change Password',style:TextStyle(fontSize:16,fontWeight:FontWeight.w400,color:Colors.black),),
                             ),
                             Divider(
                               height:1,
@@ -126,7 +149,12 @@ class _ProfileMenuState extends State<ProfileMenu> {
                             ),
                             ListTile(
                               onTap: (){
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>faq()
+                                    )
+                                );
                               },
                               title:Text('FAQ',style:TextStyle(fontSize:16,fontWeight:FontWeight.w400,color:Colors.black),),
                             ),

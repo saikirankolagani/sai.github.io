@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iflexweb_app/basic_profile.dart';
+import 'package:iflexweb_app/cart.dart';
+import 'package:iflexweb_app/searchbar.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
+import '../address.dart';
+import '../change_password.dart';
+import '../faq.dart';
 import '../forgot_password.dart';
 import '../home.dart';
 import '../order_history.dart';
@@ -49,6 +54,31 @@ var username='Stefani Williams';
                       color: Colors.white),
                 ),
               ),
+
+              Row(
+                children: [
+               Container(
+                 width: 500,
+                 height: 30,
+                 color: Colors.white,
+                 child: TextField(),
+               )
+              ],
+              ),
+              Row(
+                children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                MyApp()
+                        ));
+                  },
+                    child: Text('search bar',style:TextStyle(fontSize:16,color:Colors.white,),)),
+                ],
+              ),
               Row(
                 children: [
                   Icon(
@@ -75,7 +105,7 @@ var username='Stefani Williams';
                     underline:Container(
                       height:0,
                     ),
-                   items: <String>['Basic Profile', 'Wish list', 'Orders', 'Refer A Friend','Address','Help','Logout'].map((String value)
+                   items: <String>['Basic Profile', 'Wish list', 'Orders', 'Refer A Friend','Address','Change Password','Help','Logout'].map((String value)
                         {
                       return new DropdownMenuItem<String>(
                         value:value,
@@ -121,7 +151,15 @@ var username='Stefani Williams';
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            forgotpassword()));
+                                            address()));
+                                //print('print b');
+                            break;
+                              case "Change Password":
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            changepassword()));
                                 //print('print b');
                                 break;
                               case "Help":
@@ -129,7 +167,7 @@ var username='Stefani Williams';
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            forgotpassword()));
+                                            faq()));
                                 //print('print b');
                                 break;
                               case "Logout":
@@ -210,9 +248,18 @@ var username='Stefani Williams';
               // // ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
+                child: GestureDetector(
+                  onTap:(){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                cart()));
+                  },
+                  child: Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -223,108 +270,4 @@ var username='Stefani Williams';
   }
 }
 
-class _ShapedWidget extends StatelessWidget {
-  _ShapedWidget({this.onlyTop = false});
 
-  final double padding = 4.0;
-  final bool onlyTop;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Material(
-      clipBehavior: Clip.antiAlias,
-      shape: _ShapedWidgetBorder(
-          borderRadius: BorderRadius.all(Radius.circular(padding)),
-          padding: padding),
-      elevation: 4.0,
-      child: Container(
-          color: Colors.yellow,
-          padding: EdgeInsets.all(padding).copyWith(bottom: padding * 2),
-          child: onlyTop
-              ? SizedBox(
-                  width: 190.0,
-                  height: 20.0,
-                )
-              : SizedBox(
-                  width: 190.0,
-                  height: 336.0,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Basic Profile'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.favorite_outline_sharp),
-                        title: Text('Wish list'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.shopping_cart),
-                        title: Text('orders'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.share),
-                        title: Text('Refer a friend'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.location_on_outlined),
-                        title: Text('Address'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.help),
-                        title: Text('Help'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                      ListTile(
-                        leading: Icon(Icons.power_settings_new),
-                        title: Text('Logout'),
-                        onTap: () {
-                          print('print person');
-                        },
-                      ),
-                    ],
-                  ),
-                  /* child: onlyTop ? SizedBox(width: 150.0, height: 20.0,) :  SizedBox(width: 150.0, height: 250.0,
-
-             child: Center(child: Text('ShapedWidget'),),),*/
-                )),
-    ));
-  }
-}
-
-class _ShapedWidgetBorder extends RoundedRectangleBorder {
-  _ShapedWidgetBorder({
-    @required this.padding,
-    side = BorderSide.none,
-    borderRadius = BorderRadius.zero,
-  }) : super(side: side, borderRadius: borderRadius);
-  final double padding;
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
-    return Path()
-      ..moveTo(rect.width - 8.0, rect.top)
-      ..lineTo(rect.width - 20.0, rect.top - 16.0)
-      ..lineTo(rect.width - 32.0, rect.top)
-      ..addRRect(borderRadius.resolve(textDirection).toRRect(Rect.fromLTWH(
-          rect.left, rect.top, rect.width, rect.height - padding)));
-  }
-}

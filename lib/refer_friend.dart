@@ -55,7 +55,7 @@ class _ReferFriendState extends State<ReferFriend> {
                                     Row(
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context).size.width * 0.20,
+                                          width: MediaQuery.of(context).size.width * 0.18,
                                           color:Colors.black12,
                                           child: Padding(
                                             padding: const EdgeInsets.fromLTRB(30,8,30,8),
@@ -65,7 +65,7 @@ class _ReferFriendState extends State<ReferFriend> {
                                         Row(
                                           children: [
                                             Container(
-                                              width: MediaQuery.of(context).size.width * 0.20,
+                                              width: MediaQuery.of(context).size.width * 0.15,
                                               child: GestureDetector(
                                                 onTap:(){
                                                   print('code Copied');
@@ -91,8 +91,7 @@ class _ReferFriendState extends State<ReferFriend> {
                                           child: GestureDetector(
                                             onTap: (){
                                               //print('refer now');
-                                             showDialog(context: context,
-                                             builder: (BuildContext context) {
+                                             showDialog(context: context,builder: (BuildContext context) {
                                                return AlertDialog(
                                                  content:Column(
                                                    mainAxisSize: MainAxisSize.min,
@@ -111,7 +110,7 @@ class _ReferFriendState extends State<ReferFriend> {
                                                          ),
                                                        ),
                                                      ),
-                                                     SizedBox(height:10,),
+                                                     SizedBox(height:40,),
                                                      GestureDetector(
                                                        onTap:(){
 

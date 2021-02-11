@@ -9,6 +9,8 @@ import 'package:iflexweb_app/utils/app_colors.dart';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   runApp(new MaterialApp(
     home: login(),
@@ -22,6 +24,13 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  void saveEmail(String mailid) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('Email', mailid);
+    print(mailid);
+    print('this is mailid${mailid}');
+  }
+
   TextEditingController emailController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
   bool _showPassword = false;
@@ -250,10 +259,15 @@ class _loginState extends State<login> {
                               onPressed: () async{
                                 try {
                                   if (_formKey.currentState.validate()) {
+
                                     Repo loginRepo = Repo();
                                     LoginModel loginmodel = await loginRepo.login(
                                         emailController.text,
                                         passwordController.text);
+                                    setState(() {
+                                      saveEmail(emailController.text.toString());
+                                    });
+
                                     if (loginmodel.status==200){
                                       Navigator.push(
                                           context,
@@ -340,7 +354,7 @@ class _loginState extends State<login> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height:20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -356,7 +370,7 @@ class _loginState extends State<login> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          //builder: (context)=>home()
+                                          builder: (context)=>home()
                                           ));
                                 },
                                 child: Padding(
@@ -367,7 +381,7 @@ class _loginState extends State<login> {
                               ),
                             ),
                             Spacer(
-                              flex: 1,
+                              flex:20,
                             ),
                             Container(
                               height: 60,
@@ -377,7 +391,7 @@ class _loginState extends State<login> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          //builder: (context)=>home()
+                                          builder: (context)=>home()
                                           ));
                                 },
                                 child: Padding(

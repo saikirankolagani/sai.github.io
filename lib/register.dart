@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:iflexweb_app/main.dart';
 import 'package:iflexweb_app/models/register_model.dart';
 import 'package:iflexweb_app/repo/auth_repo.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
@@ -42,7 +43,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: TextFormField(
                         controller: firstnameController,
                         decoration: InputDecoration(
@@ -53,7 +54,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: TextFormField(
                         controller: lastnameController,
                         decoration: InputDecoration(
@@ -64,7 +65,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: TextFormField(
                         controller:phonenumberController,
                         decoration: InputDecoration(
@@ -75,7 +76,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: TextFormField(
                         controller: emailidController,
                         decoration: InputDecoration(
@@ -86,7 +87,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
@@ -112,7 +113,7 @@ class _registerState extends State<register> {
                         ),
                       ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,50,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
@@ -137,7 +138,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50,10,0,10),
+                      padding: const EdgeInsets.fromLTRB(90,10,0,10),
                       child: Row(
                         children: [
                           Row(
@@ -178,7 +179,7 @@ class _registerState extends State<register> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                      padding: const EdgeInsets.fromLTRB(90,10,90,10),
                       child: Container(
                         width: double.infinity,
                         child: RaisedButton(
@@ -213,36 +214,33 @@ class _registerState extends State<register> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Already have an account? ",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black54,
-                                  )),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context)=>home()
-                                      ));
-                                },
-                                child: Text(
-                                  "Sign in",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color:AppColors.blueColor,
-                                  ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Already have an account? ",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black54,
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context)=>login()
+                                    ));
+                              },
+                              child: Text(
+                                "Sign in",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color:AppColors.blueColor,
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         ),
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iflexweb_app/ui_widgets/appbar.dart';
 import 'package:iflexweb_app/ui_widgets/side_navigation_menu.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 
@@ -68,7 +69,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       body: SingleChildScrollView(
         child:Column(
           children: [
-            Container(
+            /*Container(
               width: double.infinity,
               color: AppColors.blueColor,
               child: Row(
@@ -124,7 +125,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   ),
                 ],
               ),
-            ),
+            ),*/
+            TopBar(),
             SizedBox(height:10,),
             Row(
               children: [
@@ -152,167 +154,162 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             double width = MediaQuery.of(context).size.width;
                             int widthDiv = 260;
                             int countRow = width ~/ widthDiv;
-                            return
-                              Expanded(
-                                child:GridView(
-                                  shrinkWrap: true,
-                                  // physics: ScrollPhysics(),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: countRow,
-                                    childAspectRatio:0.80,
-                                    mainAxisSpacing:5,
-                                    crossAxisSpacing:5,
-                                  ),
-                                  children: List.generate(cardModel.length, (index) => Card(
-                                    child:Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(cardModel[index].offerPercentage.toString()+"%off",style:TextStyle(fontSize:14,fontWeight:FontWeight.w500,color:Colors.redAccent),),
-                                              ],
-                                            ),
-                                            Icon(Icons.favorite,color:Colors.black38,)
-                                          ],
-                                        ),
-                                        Center(
-                                            child:
-                                            //SizedBox(width: 60,),
-                                            Container(
-                                              height:100,
-                                              width: 150,
-                                              child:Image.asset(cardModel[index].imageUrl.toString()),
-                                            )
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Text(cardModel[index].name.toString()+'\n'+cardModel[index].name.toString(),style:TextStyle(fontWeight:FontWeight.w500,color:Colors.black),),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(width: 50,),
-                                            Row(
-                                              children: [
-                                                DropdownButtonHideUnderline(
-                                                  child: DropdownButton<String>(
-                                                    items:cardModel[index].grams.map((String dropDownStringItem) {
-                                                      return DropdownMenuItem<String>(
-                                                        value: dropDownStringItem,
-                                                        child: Text(dropDownStringItem),
-                                                      );
-                                                    }).toList(),
-                                                    onChanged: (String newValueSelected) {
-                                                      setState(() {
-                                                        cardModel[index].selectedGrams=newValueSelected;
-                                                      });
-                                                    },
-                                                    value: cardModel[index].selectedGrams,
-                                                    hint: Text('grams'),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  GestureDetector(
-                                                    onTap: (){
-                                                      if(cardModel[index].quantity>0)cardModel[index].quantity--;
-                                                      setState(() {
-                                                        cardModel[index].quantity=cardModel[index].quantity;
-                                                      });
-                                                    },
-                                                    child: Container(
-                                                      height: 20,
-                                                      width: 20,
-                                                      color: Colors.grey,
-                                                      child: Icon(Icons.remove,size: 10,),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(8),
-                                                    child: Text(cardModel[index].quantity.toString()),
-                                                  ),
-                                                  GestureDetector(
-                                                    onTap: (){
-                                                      cardModel[index].quantity++;
-                                                      setState(() {
-                                                        cardModel[index].quantity=cardModel[index].quantity;
-                                                      });
-
-                                                    },
-                                                    child: Container(
-                                                      height: 20,
-                                                      width: 20,
-                                                      color: Colors.grey,
-                                                      child: Icon(Icons.add,size: 10,),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              child: Row(
+                            return GridView.count(
+                                shrinkWrap: true,
+                                // physics: ScrollPhysics(),
+                                  crossAxisCount: countRow,
+                                  childAspectRatio:0.80,
+                                  mainAxisSpacing:5,
+                                  crossAxisSpacing:5,
+                                children: List.generate(cardModel.length, (index) => Card(
+                                  child:Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(cardModel[index].offerPercentage.toString()+"%off",style:TextStyle(fontSize:14,fontWeight:FontWeight.w500,color:Colors.redAccent),),
+                                            ],
+                                          ),
+                                          Icon(Icons.favorite,color:Colors.black38,)
+                                        ],
+                                      ),
+                                      Center(
+                                          child:
+                                          //SizedBox(width: 60,),
+                                          Container(
+                                            height:100,
+                                            width: 150,
+                                            child:Image.asset(cardModel[index].imageUrl.toString()),
+                                          )
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Column(
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      Text("\$${cardModel[index].pricePerPacket}",style:TextStyle(fontWeight:FontWeight.w400,color:AppColors.greenColor),)
+                                                      Text(cardModel[index].name.toString()+'\n'+cardModel[index].name.toString(),style:TextStyle(fontWeight:FontWeight.w500,color:Colors.black),),
                                                     ],
                                                   ),
-                                                  Text("/packet",style:TextStyle(fontWeight:FontWeight.w400,color:Colors.grey),)
                                                 ],
                                               ),
-                                            ),
-                                            // SizedBox(width:20,),
-                                            GestureDetector(
-                                              onTap:(){
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      //builder: (context)=>register()
-                                                    ));
-                                              },
-                                              child: Card(
-                                                child: Container(
-                                                    height:25.0,
-                                                    width:70.0,
-                                                    decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          width:1,
-                                                          color: Colors.blue,
-                                                        ),
-                                                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                                                    child: Center(child: Text("Add Cart",style: TextStyle(fontSize:10,fontWeight:FontWeight.w500 ,color:AppColors.blueColor,decoration:TextDecoration.none),))),
+                                            ],
+                                          ),
+                                          SizedBox(width: 50,),
+                                          Row(
+                                            children: [
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton<String>(
+                                                  items:cardModel[index].grams.map((String dropDownStringItem) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: dropDownStringItem,
+                                                      child: Text(dropDownStringItem),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged: (String newValueSelected) {
+                                                    setState(() {
+                                                      cardModel[index].selectedGrams=newValueSelected;
+                                                    });
+                                                  },
+                                                  value: cardModel[index].selectedGrams,
+                                                  hint: Text('grams'),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    if(cardModel[index].quantity>0)cardModel[index].quantity--;
+                                                    setState(() {
+                                                      cardModel[index].quantity=cardModel[index].quantity;
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    height: 20,
+                                                    width: 20,
+                                                    color: Colors.grey,
+                                                    child: Icon(Icons.remove,size: 10,),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8),
+                                                  child: Text(cardModel[index].quantity.toString()),
+                                                ),
+                                                GestureDetector(
+                                                  onTap: (){
+                                                    cardModel[index].quantity++;
+                                                    setState(() {
+                                                      cardModel[index].quantity=cardModel[index].quantity;
+                                                    });
 
-                                      ],
-                                    ),
-                                  )
+                                                  },
+                                                  child: Container(
+                                                    height: 20,
+                                                    width: 20,
+                                                    color: Colors.grey,
+                                                    child: Icon(Icons.add,size: 10,),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text("\$${cardModel[index].pricePerPacket}",style:TextStyle(fontWeight:FontWeight.w400,color:AppColors.greenColor),)
+                                                  ],
+                                                ),
+                                                Text("/packet",style:TextStyle(fontWeight:FontWeight.w400,color:Colors.grey),)
+                                              ],
+                                            ),
+                                          ),
+                                          // SizedBox(width:20,),
+                                          GestureDetector(
+                                            onTap:(){
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    //builder: (context)=>register()
+                                                  ));
+                                            },
+                                            child: Card(
+                                              child: Container(
+                                                  height:25.0,
+                                                  width:70.0,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        width:1,
+                                                        color: Colors.blue,
+                                                      ),
+                                                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                                                  child: Center(child: Text("Add Cart",style: TextStyle(fontSize:10,fontWeight:FontWeight.w500 ,color:AppColors.blueColor,decoration:TextDecoration.none),))),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+
+                                    ],
                                   ),
+                                )
                                 ),
                               );
                           },

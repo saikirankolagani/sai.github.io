@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:iflexweb_app/models/check_otp.dart';
 import 'package:iflexweb_app/models/forget_password_model.dart';
 import 'package:iflexweb_app/repo/auth_repo.dart';
+import 'package:iflexweb_app/ui_widgets/saved_mailid.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import 'home.dart';
+import 'new_password.dart';
 class forgotpassword extends StatefulWidget {
 
   @override
@@ -138,7 +140,7 @@ class _forgotpasswordState extends State<forgotpassword> {
                                             textColor: Colors.white,
                                             child: Padding(
                                               padding: const EdgeInsets.all(8.0),
-                                              child: Text("Login",style: TextStyle(fontSize:15,color: Colors.white)),
+                                              child: Text("Submit",style: TextStyle(fontSize:15,color: Colors.white)),
                                             ),
                                             color: Colors.lightGreen,
                                             shape: RoundedRectangleBorder(
@@ -147,9 +149,23 @@ class _forgotpasswordState extends State<forgotpassword> {
                                             onPressed: ()async{
                                               Repo loginRepo = Repo();
                                               CheckOtp loginmodel = await loginRepo.createcheckotp(emailidController.text,otp);
+
+
+
+
+                                             //  MailId mailid=MailId();
+                                             // await mailid.loadSavedData();
+                                             //  mailid.emailid;
+                                             //  print('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm${ mailid.emailid}');
+
+
+
                                               Navigator.push(context,MaterialPageRoute(
-                                                builder: (context)=>home(),
+                                                builder: (context)=>newpassword(emailid:emailidController.text,),
                                               ));
+
+
+
                                             },
                                           ),
                                         ),

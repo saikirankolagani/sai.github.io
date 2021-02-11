@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:iflexweb_app/CardModel.dart';
+import 'package:iflexweb_app/models/profile_update.dart';
+import 'package:iflexweb_app/repo/auth_repo.dart';
 import 'package:iflexweb_app/ui_widgets/appbar.dart';
 import 'package:iflexweb_app/ui_widgets/profile_menu.dart';
 import 'package:iflexweb_app/utils/app_colors.dart';
+
+import 'home.dart';
 class BasicProfile extends StatefulWidget {
   @override
   _BasicProfileState createState() => _BasicProfileState();
 }
 
 class _BasicProfileState extends State<BasicProfile> {
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController emailIdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +60,7 @@ class _BasicProfileState extends State<BasicProfile> {
                                       child: Column(
                                         children: [
                                           TextFormField(
+                                            controller:firstNameController,
                                             decoration: InputDecoration(
                                                 border:OutlineInputBorder(),
                                                 hintText: 'Stefani',
@@ -60,6 +69,7 @@ class _BasicProfileState extends State<BasicProfile> {
                                           ),
                                           SizedBox(height:20,),
                                           TextFormField(
+                                            controller:lastNameController,
                                             decoration: InputDecoration(
                                                 border:OutlineInputBorder(),
                                                 hintText: 'Williams',
@@ -68,6 +78,7 @@ class _BasicProfileState extends State<BasicProfile> {
                                           ),
                                           SizedBox(height:20,),
                                           TextFormField(
+                                            controller:mobileController,
                                             decoration: InputDecoration(
                                                 border:OutlineInputBorder(),
                                                 hintText: '+41 64587890',
@@ -76,6 +87,7 @@ class _BasicProfileState extends State<BasicProfile> {
                                           ),
                                           SizedBox(height:20,),
                                           TextFormField(
+                                            controller:emailIdController,
                                             decoration: InputDecoration(
                                                 border:OutlineInputBorder(),
                                                 hintText: 'stefani.williams@yahoo.com',
@@ -99,11 +111,13 @@ class _BasicProfileState extends State<BasicProfile> {
                                               shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(5.0),
                                               ),
-                                              onPressed: () {
+                                              onPressed: () async{
+                                                Repo loginRepo = Repo();
+                                                ProfileUpdate loginmodel = await loginRepo.createprofileUpdate(firstNameController.text,lastNameController.text,emailIdController.text,mobileController.text);
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                      //builder: (context)=>home(),
+                                                      builder: (context)=>home(),
                                                     ));
                                               },
                                             ),

@@ -6,6 +6,9 @@ class Urls {
   static final String register = baseUrl+rootPath+"register";
   static final String forgetpassword = baseUrl+rootPath+"Forget_password";
   static final String checkotp = baseUrl+rootPath+"check_otp";
+  static final String passwordupdate = baseUrl+rootPath+"password_update";
+  static final String changepassword = baseUrl+rootPath+"change_password";
+  static final String updateProfile = baseUrl+rootPath+"profile_update";
 
 
 
