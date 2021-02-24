@@ -15,7 +15,7 @@ class _cartState extends State<cart> {
   @override
   Widget build(BuildContext context) {
     List<Step>my_steps=[
-      Step(title:Row(
+      Step(title:Row(git
         children: [
           Text('Sign In To Place Your Order'),
         ],
