@@ -8,30 +8,35 @@ class cart extends StatefulWidget {
 }
 
 class _cartState extends State<cart> {
+  int counter=0;
+  int newCounter=0;
   int current_step =0;
-  List<Step>my_steps=[
-    Step(title:Row(
-      children: [
-        Text('Sign In To Place Your Order'),
-      ],
-    ),
-        content:Row(
-          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-          children: [
-        Container(child:
-        Row(
-          children: [
-            Text('Don\'t want to save your details? Use'),
-            GestureDetector(
-              onTap:(){
-               /* showDialog(context: context,builder: (BuildContext context) {
+  String selectedPayment='Credit/Debit card';
+  @override
+  Widget build(BuildContext context) {
+    List<Step>my_steps=[
+      Step(title:Row(
+        children: [
+          Text('Sign In To Place Your Order'),
+        ],
+      ),
+          content:Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween,
+            children: [
+              Container(child:
+              Row(
+                children: [
+                  Text('Don\'t want to save your details? Use'),
+                  GestureDetector(
+                      onTap:(){
+                        showDialog(context: context,builder: (BuildContext context) {
                   return AlertDialog(
                     content:Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Refer A Friend',style:TextStyle(color:AppColors.blueColor,fontSize:16,fontWeight:FontWeight.w500),),
+                        Text('Guest Checkout',style:TextStyle(color:AppColors.blueColor,fontSize:16,fontWeight:FontWeight.w500),),
                         SizedBox(height:10,),
-                        Text('Please enter the Emai lid to refer a friend',style:TextStyle(color:Colors.black45,fontSize:16,fontWeight:FontWeight.w400),),
+                        Text('Please enter the Email id to receive the invoice',style:TextStyle(color:Colors.black45,fontSize:16,fontWeight:FontWeight.w400),),
                         SizedBox(height:10,),
                         Container(
                           width: MediaQuery.of(context).size.width * 0.20,
@@ -39,7 +44,7 @@ class _cartState extends State<cart> {
                             decoration: InputDecoration(
                                 border:OutlineInputBorder(),
                                 hintText: 'Email ID',
-                                labelText: 'Friend Email'
+                                labelText: 'Your Email'
                             ),
                           ),
                         ),
@@ -55,7 +60,7 @@ class _cartState extends State<cart> {
                                 color:AppColors.blueColor,
                                 child: Center(
                                     child: Text(
-                                      "Refer A Friend",
+                                      "Send Otp",
                                       style: TextStyle(
                                           fontSize:20,
                                           fontWeight: FontWeight
@@ -68,75 +73,366 @@ class _cartState extends State<cart> {
                     ),
                   );
                 },
-                );*/
-              },
-                child: Text('Guest checkout ?',style:TextStyle(color:AppColors.blueColor,fontSize:14,),)),
-          ],
-        )),
-        Row(
-          children: [
-            Card(
-              child: GestureDetector(
-                onTap:(){
+                );
+                      },
+                      child: Text('Guest checkout ?',style:TextStyle(color:AppColors.blueColor,fontSize:14,),)),
+                ],
+              )),
+              Row(
+                children: [
+                  Card(
+                    child: GestureDetector(
+                      onTap:(){
+                        showDialog(context: context,builder: (BuildContext context) {
+                          return AlertDialog(
+                            content:Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Guest Checkout',style:TextStyle(color:AppColors.blueColor,fontSize:16,fontWeight:FontWeight.w500),),
+                                SizedBox(height:10,),
+                                Text('Please enter the Email id to receive the invoice',style:TextStyle(color:Colors.black45,fontSize:16,fontWeight:FontWeight.w400),),
+                                SizedBox(height:10,),
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.20,
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                        border:OutlineInputBorder(),
+                                        hintText: 'Email ID',
+                                        labelText: 'Your Email'
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height:10,),
+                                GestureDetector(
+                                  onTap:(){
 
-                },
-                child: Container(
-                    height:30.0,
-                    width:90.0,
-                   color:AppColors.blueColor,
-                    child: Center(
-                        child: Text(
-                          "Sign In",
-                          style: TextStyle(
-                              fontSize:14, fontWeight: FontWeight.w400, color:Colors.white, decoration: TextDecoration.none),))),
+                                  },
+                                  child: Card(
+                                    child: Container(
+                                      //height:55.0,
+                                        width:MediaQuery.of(context).size.width * 0.20,
+                                        color:AppColors.blueColor,
+                                        child: Center(
+                                            child: Text(
+                                              "Send Otp",
+                                              style: TextStyle(
+                                                  fontSize:20,
+                                                  fontWeight: FontWeight
+                                                      .w400,
+                                                  color:Colors.white,
+                                                  decoration: TextDecoration.none),))),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        );
+                      },
+                      child: Container(
+                          height:30.0,
+                          width:90.0,
+                          color:AppColors.blueColor,
+                          child: Center(
+                              child: Text(
+                                "Sign In",
+                                style: TextStyle(
+                                    fontSize:14, fontWeight: FontWeight.w400, color:Colors.white, decoration: TextDecoration.none),))),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          isActive:true ),
+      Step(title:Row(
+        children: [
+          Text('Delivery Address'),
+        ],
+      ),
+          content:Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Choose your delivery address from the address book'),
+              Row(
+                children: [
+                  Card(
+                    child: Container(
+                        height:30.0,
+                        width:120.0,
+                        decoration: BoxDecoration(
+                            border: Border
+                                .all(
+                              width: 1,
+                              color: AppColors
+                                  .blueColor,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: GestureDetector(
+                          onTap:(){
+                            showDialog(context: context,builder: (BuildContext context){
+                              return AlertDialog(
+                                content:Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Add New Address',style:TextStyle(fontSize:22,color:Colors.black,fontWeight:FontWeight.w500),),
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap:(){
+                                                Navigator.pop(context);
+                                              },
+                                              child: CircleAvatar(
+                                                backgroundColor: Colors.white,
+                                                radius:20,
+                                                child: Icon(Icons.close, color: Colors.black,),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height:10,),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: 'Street',
+                                                    labelText: 'Unit'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height:10,),Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: '505001',
+                                                    labelText: 'postal code'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),SizedBox(height:10,),Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: 'India',
+                                                    labelText: 'Country'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),SizedBox(height:10,),Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: 'Queensland',
+                                                    labelText: 'State'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),SizedBox(height:10,),Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: 'Queensland',
+                                                    labelText: 'City'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height:10,),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context).size.width * 0.40,
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                    border:OutlineInputBorder(),
+                                                    hintText: 'Opposite Sams Club',
+                                                    labelText: 'Land Mark (Optional)'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height:10,),
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap:(){
+
+                                              },
+                                              child: Card(
+                                                child: Container(
+                                                  //height:55.0,
+                                                    width:MediaQuery.of(context).size.width * 0.40,
+                                                    color:AppColors.blueColor,
+                                                    child: Center(
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Text("Add Address", style: TextStyle(fontSize:25,
+                                                              fontWeight: FontWeight.w500,
+                                                              color:Colors.white,
+                                                              decoration: TextDecoration.none),),
+                                                        ))),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )
+
+                                  ],
+                                ),
+                              );
+                            },
+                            );
+                          },
+                          child: Center(
+                              child: Text(
+                                "+ Add New Address",
+                                style: TextStyle(
+                                    fontSize:12,
+                                    fontWeight: FontWeight.w400,color:AppColors.blueColor,decoration: TextDecoration.none),)),
+                        )),
+                  ),
+                ],
+              )
+            ],
+          ),isActive:true ),
+      Step(title:Text('Delivery Options'),subtitle:Text('Choose your Availability time'),content:Text('process 2'),isActive:true ),
+      Step(title:Text('Select Payment Options'),subtitle:Text('Select your payment method from the existing one or add new one'),content:Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.40,
+            child:Card(
+              child:SizedBox(
+                height:50,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap:(){
+                          setState(() {
+                                selectedPayment='Credit/Debit card';
+                          });
+                        },
+                          child: Text('Credit/Debit card',style:TextStyle(color:Colors.black,fontSize:14),)),
+                    ),
+                    VerticalDivider(
+                      width:1,
+                      thickness:1,
+                      indent:10,
+                      endIndent:10,
+                      color:Colors.black,
+                    ),Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              selectedPayment='Net Banking';
+                            });
+                          },
+                          child: Text('Net Banking',style:TextStyle(color:Colors.black,fontSize:14),)),
+                    ),
+                    VerticalDivider(
+                      width:1,
+                      thickness:1,
+                      indent:10,
+                      endIndent:10,
+                      color:Colors.black,
+                    ),Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              selectedPayment='UPI';
+                            });
+                          },
+                          child: Text('UPI',style:TextStyle(color:Colors.black,fontSize:14),)),
+                    ),
+                    VerticalDivider(
+                      width:1,
+                      thickness:1,
+                      indent:10,
+                      endIndent:10,
+                      color:Colors.black,
+                    ),Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              selectedPayment='Wallet';
+                            });
+                          },
+                          child: Text('Wallet',style:TextStyle(color:Colors.black,fontSize:14),)),
+                    ),
+                    VerticalDivider(
+                      width:1,
+                      thickness:1,
+                      indent:10,
+                      endIndent:10,
+                      color:Colors.black,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap:(){
+                            setState(() {
+                              selectedPayment='Cash on delivery';
+                            });
+                          },
+                          child: Text('Cash on delivery',style:TextStyle(color:Colors.black,fontSize:14),)),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
-        )
-          ],
-        ),
-        isActive:true ),
-    Step(title:Row(
-      children: [
-        Text('Delivery Address'),
-      ],
-    ),
-        content:Row(
-          mainAxisAlignment:MainAxisAlignment.spaceBetween,
-      children: [
-        Text('Choose your delivery address from the address book'),
-        Row(
-          children: [
-            Card(
-              child: Container(
-                  height:30.0,
-                  width:120.0,
-                  decoration: BoxDecoration(
-                      border: Border
-                          .all(
-                        width: 1,
-                        color: AppColors
-                            .blueColor,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  child: Center(
-                      child: Text(
-                        "+ Add New Address",
-                        style: TextStyle(
-                            fontSize:12,
-                            fontWeight: FontWeight.w400,color:AppColors.blueColor,decoration: TextDecoration.none),))),
-            ),
-          ],
-        )
-      ],
-    ),isActive:true ),
-    Step(title:Text('Delivery Options'),subtitle:Text('Choose your Availability time'),content:Text('process 2'),isActive:true ),
-    Step(title:Text('Select Payment Options'),subtitle:Text('Select your payment method from the existing one or add new one'),content:Text('process 3'),isActive:true ),
-  ];
-  int counter=0;
-  int newCounter=0;
-  @override
-  Widget build(BuildContext context) {
+          ),
+          if (selectedPayment=='Credit/Debit card')
+          Text('credit'),
+          if (selectedPayment=='Net Banking')
+          Text('netbanking'),
+          if (selectedPayment=='UPI')
+          Text('UPI'),
+          if (selectedPayment=='Wallet')
+          Text('Wallet'),
+          if (selectedPayment=='Cash on delivery')
+          Text('Cashon delivery')
+        ],
+      ),isActive:true ),
+    ];
+
+
+
+
+
     return Scaffold(
       bottomNavigationBar:BottomAppBar(
         color:AppColors.blueColor,

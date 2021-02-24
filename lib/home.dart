@@ -49,10 +49,13 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
     'images/bread.png',
     'images/c.png',
     'images/o.png',
+    'images/tomato.png',
+    'images/potato.png',
+    'images/onion.png'
   ];
 
   createCardList() {
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 8; i++) {
       cardModel.add(CardModel(
           name: "fruit $i",
           grams: new List()
@@ -693,7 +696,7 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
                                                             ),
                                                             Container(
                                                               //height:300,
-                                                              width: 600,
+                                                              width: MediaQuery.of(context).size.width * 0.60,
                                                               //color:Colors.black12,
                                                               child: Column(
                                                                 children: [
@@ -755,12 +758,15 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
                                                                         padding: const EdgeInsets
                                                                             .all(
                                                                             8.0),
-                                                                        child: Text(
-                                                                          'Lorem ipsum dolor sit amet, consectetur''\n' +
-                                                                              'adipising elit,sed do eiusmod tempor incididunt',
-                                                                          style: TextStyle(
-                                                                              color: Colors
-                                                                                  .black),),
+                                                                        child: Container(
+                                                                          width: MediaQuery.of(context).size.width * 0.30,
+                                                                          child: Text(
+                                                                            'Lorem ipsum dolor sit amet, consectetur''\n' +
+                                                                                'adipising elit,sed do eiusmod tempor incididunt',
+                                                                            style: TextStyle(
+                                                                                color: Colors
+                                                                                    .black),),
+                                                                        ),
                                                                       )
                                                                     ],
                                                                   ),
@@ -989,19 +995,280 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
                                                           endIndent: 20,
                                                         ),
                                                         Container(
-                                                          height: 270,
-                                                          width: 1000,
-                                                          child: Expanded(
+                                                          width: MediaQuery.of(context).size.width * 0.70,
+                                                          height:MediaQuery.of(context).size.height * 0.50,
+                                                          child: Column(
+                                                            children: [
+                                                              Container(
+                                                                child: Expanded(
+                                                                  child: ListView.builder(
+                                                                    scrollDirection: Axis.horizontal,
+                                                                    itemCount:cardModel.length,
+                                                                    itemBuilder:(BuildContext context, int index){
+                                                                      return GestureDetector(
+                                                                        onTap: () {},
+                                                                        child: Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(8.0),
+                                                                          child: SingleChildScrollView(
+                                                                            child: Container(
+                                                                              width: MediaQuery.of(context).size.width * 0.15,
+                                                                              child: Card(
+                                                                                child: Column(
+                                                                                  children: [
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                      children: [
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              cardModel[index].offerPercentage.toString() + "%off",
+                                                                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
+                                                                                                  color: Colors.redAccent),),
+                                                                                            //SizedBox(width: 150,)
+                                                                                          ],
+                                                                                        ),
+                                                                                        Icon(
+                                                                                          Icons
+                                                                                              .favorite,
+                                                                                          color: Colors
+                                                                                              .grey,)
+                                                                                      ],
+                                                                                    ),
+                                                                                    Center(
+                                                                                        child:
+                                                                                        //SizedBox(width: 60,),
+                                                                                        Container(
+                                                                                          height: 100,
+                                                                                          width: 150,
+                                                                                          child: Image
+                                                                                              .asset(
+                                                                                              cardModel[index]
+                                                                                                  .imageUrl
+                                                                                                  .toString()),
+                                                                                        )
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment
+                                                                                          .spaceBetween,
+                                                                                      children: [
+                                                                                        Column(
+                                                                                          children: [
+                                                                                            Column(
+                                                                                              children: [
+                                                                                                Row(
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      cardModel[index]
+                                                                                                          .name +
+                                                                                                          '\n' +
+                                                                                                          cardModel[index]
+                                                                                                              .name,
+                                                                                                      style: TextStyle(
+                                                                                                          fontWeight: FontWeight
+                                                                                                              .w500,
+                                                                                                          color: Colors
+                                                                                                              .black),),
+                                                                                                  ],
+                                                                                                ),
+                                                                                              ],
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                        SizedBox(
+                                                                                          width: 50,),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            DropdownButtonHideUnderline(
+                                                                                              child: DropdownButton<
+                                                                                                  String>(
+                                                                                                items: cardModel[index]
+                                                                                                    .grams
+                                                                                                    .map((
+                                                                                                    String dropDownStringItem) {
+                                                                                                  return DropdownMenuItem<
+                                                                                                      String>(
+                                                                                                    value: dropDownStringItem,
+                                                                                                    child: Text(
+                                                                                                        dropDownStringItem),
+                                                                                                  );
+                                                                                                })
+                                                                                                    .toList(),
+                                                                                                onChanged: (
+                                                                                                    String newValueSelected) {
+                                                                                                  setState(() {
+                                                                                                    cardModel[index]
+                                                                                                        .selectedGrams =
+                                                                                                        newValueSelected;
+                                                                                                  });
+                                                                                                },
+                                                                                                value: cardModel[index]
+                                                                                                    .selectedGrams,
+                                                                                                hint: Text(
+                                                                                                    'grams'),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Row(
+                                                                                      children: [
+                                                                                        Container(
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              GestureDetector(
+                                                                                                onTap: () {
+                                                                                                  if (cardModel[index]
+                                                                                                      .quantity >
+                                                                                                      0) cardModel[index]
+                                                                                                      .quantity--;
+                                                                                                  setState(() {
+                                                                                                    cardModel[index]
+                                                                                                        .quantity =
+                                                                                                        cardModel[index]
+                                                                                                            .quantity;
+                                                                                                  });
+                                                                                                },
+                                                                                                child: Container(
+                                                                                                  height: 20,
+                                                                                                  width: 20,
+                                                                                                  color: Colors
+                                                                                                      .grey[300],
+                                                                                                  child: Icon(
+                                                                                                    Icons
+                                                                                                        .remove,
+                                                                                                    size: 10,),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: const EdgeInsets
+                                                                                                    .all(
+                                                                                                    8),
+                                                                                                child: Text(
+                                                                                                    cardModel[index]
+                                                                                                        .quantity
+                                                                                                        .toString()),
+                                                                                              ),
+                                                                                              GestureDetector(
+                                                                                                onTap: () {
+                                                                                                  cardModel[index]
+                                                                                                      .quantity++;
+                                                                                                  setState(() {
+                                                                                                    cardModel[index]
+                                                                                                        .quantity =
+                                                                                                        cardModel[index]
+                                                                                                            .quantity;
+                                                                                                  });
+                                                                                                },
+                                                                                                child: Container(
+                                                                                                  height: 20,
+                                                                                                  width: 20,
+                                                                                                  color: Colors
+                                                                                                      .grey[300],
+                                                                                                  child: Icon(
+                                                                                                    Icons
+                                                                                                        .add,
+                                                                                                    size: 10,),
+                                                                                                ),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment
+                                                                                          .spaceBetween,
+                                                                                      children: [
+                                                                                        Container(
+                                                                                          child: Row(
+                                                                                            children: [
+                                                                                              Row(
+                                                                                                children: [
+                                                                                                  Text(
+                                                                                                    "\$${cardModel[index]
+                                                                                                        .pricePerPacket}",
+                                                                                                    style: TextStyle(
+                                                                                                        fontWeight: FontWeight
+                                                                                                            .w400,
+                                                                                                        color: AppColors
+                                                                                                            .greenColor),)
+                                                                                                ],
+                                                                                              ),
+                                                                                              Text(
+                                                                                                "/packet",
+                                                                                                style: TextStyle(
+                                                                                                    fontWeight: FontWeight
+                                                                                                        .w400,
+                                                                                                    color: Colors
+                                                                                                        .grey),)
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                        // SizedBox(width:20,),
+                                                                                        GestureDetector(
+                                                                                          onTap: () {
+                                                                                            Navigator
+                                                                                                .push(
+                                                                                                context,
+                                                                                                MaterialPageRoute(
+                                                                                                  //builder: (context)=>register()
+                                                                                                ));
+                                                                                          },
+                                                                                          child: Card(
+                                                                                            child: Container(
+                                                                                                height: 25.0,
+                                                                                                width: 70.0,
+                                                                                                decoration: BoxDecoration(
+                                                                                                    border: Border
+                                                                                                        .all(
+                                                                                                      width: 1,
+                                                                                                      color: AppColors
+                                                                                                          .blueColor,
+                                                                                                    ),
+                                                                                                    borderRadius: BorderRadius
+                                                                                                        .all(
+                                                                                                        Radius
+                                                                                                            .circular(
+                                                                                                            5))),
+                                                                                                child: Center(
+                                                                                                    child: Text(
+                                                                                                      "Add to Cart",
+                                                                                                      style: TextStyle(
+                                                                                                          fontSize: 10,
+                                                                                                          fontWeight: FontWeight
+                                                                                                              .w500,
+                                                                                                          color: AppColors
+                                                                                                              .blueColor,
+                                                                                                          decoration: TextDecoration
+                                                                                                              .none),))),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    )
+
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          /*Expanded(
                                                             child: ListView.builder(
                                                               shrinkWrap: true,
                                                               scrollDirection: Axis
                                                                   .horizontal,
                                                               // physics: NeverScrollableScrollPhysics(),
-                                                              itemCount: cardModel
-                                                                  .length,
-                                                              itemBuilder: (
-                                                                  BuildContext context,
-                                                                  int index) {
+                                                              itemCount: cardModel.length,
+                                                              itemBuilder: (BuildContext context, int index) {
                                                                 return GestureDetector(
                                                                   onTap: () {},
                                                                   child: Padding(
@@ -1267,10 +1534,8 @@ class _homeState extends State<home>with SingleTickerProviderStateMixin {
                                                                 );
                                                               },
                                                             ),
-                                                          ),
-                                                        )
-
-
+                                                          ),*/
+                                                        ),
                                                       ],
                                                     ),
                                                   ),

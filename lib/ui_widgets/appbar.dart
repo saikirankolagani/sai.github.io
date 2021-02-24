@@ -28,6 +28,7 @@ class _TopBarState extends State<TopBar> with SingleTickerProviderStateMixin {
     super.initState();
   }
 var username='Stefani Williams';
+  var selectedgram;
   @override
   Widget build(BuildContext context) {
     Animation opacityAnimation =
@@ -57,28 +58,60 @@ var username='Stefani Williams';
 
               Row(
                 children: [
+                  Container(
+                    height:40,
+                    //width:100,
+                    width: MediaQuery.of(context).size.width * 0.10,
+                    color:AppColors.yellowColor,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        items:['Fruits','Frozen','Snacks','Breakfast'].map((String dropDownStringItem) {
+                          return DropdownMenuItem<String>(
+                            value: dropDownStringItem,
+                            child: Text(dropDownStringItem,style:TextStyle(color:Colors.black)),
+                          );
+                        }).toList(),
+                        onChanged: (String newValueSelected) {
+                          setState(() {
+                            selectedgram=newValueSelected;
+                          });
+                        },
+                        value: selectedgram,
+                        hint: Center(child: Text('All',style:TextStyle(color:Colors.black,fontSize:18,fontWeight:FontWeight.w500),)),
+                      ),
+                    ),
+                  ),
                Container(
-                 width: 500,
-                 height: 30,
+                 //width: 500,
+                 width: MediaQuery.of(context).size.width * 0.30,
+                 height: 40,
                  color: Colors.white,
                  child: TextField(),
-               )
+               ),
+                  Container(
+                    //width: 500,
+                    width: MediaQuery.of(context).size.width * 0.03,
+                    height: 40,
+                    color:AppColors.yellowColor,
+                    child:Icon(Icons.search,size:22,color:Colors.black,),
+                  ),
+
               ],
               ),
-              Row(
-                children: [
-                GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MyApp()
-                        ));
-                  },
-                    child: Text('search bar',style:TextStyle(fontSize:16,color:Colors.white,),)),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //   GestureDetector(
+              //     onTap: (){
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) =>
+              //                   MyApp()
+              //           ));
+              //     },
+              //       child: Text('search bar',style:TextStyle(fontSize:16,color:Colors.white,),)),
+              //   ],
+              // ),
               Row(
                 children: [
                   Icon(
